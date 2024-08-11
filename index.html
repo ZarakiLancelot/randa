@@ -16,13 +16,13 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid mt-4">
+    <nav class="navbar navbar-expand-lg">
       <a class="navbar-brand" href="#">
-        <img src="assets/randa-white-logo.svg" alt="Randa Logo" width="1" height="1">
+        <img src="assets/randa-white-logo.svg" alt="Randa Logo" width="150" height="48">
       </a>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+      <div class="collapse navbar-collapse d-flex justify-content-around align-items-center w-100" id="navbarNav">
+        <ul class="navbar-nav d-flex justify-content-around w-75">
           <li class="nav-item">
             <a href="#" class="nav-link">PROFILE</a>
           </li>
@@ -30,43 +30,65 @@
             <a href="#" class="nav-link">ORDERS</a>
           </li>
         </ul>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#fff" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+          </svg>
+        </div>
       </div>
     </nav>
 
-    <div class="container mt-4">
-      <h3>STYLE ATTRIBUTES</h3>
-      <input type="text" id="searchInput" class="form-control mb-3" onkeyup="searchTable()" placeholder="Search for items...">
-      <table class="table table-bordered" id="styleTable">
-        <thead class="thead-dark">
-          <tr>
-            <th onclick="sortTable(0)">Style Color</th>
-            <th onclick="sortTable(1)">Style Status</th>
-            <th onclick="sortTable(2)">Assort Descr</th>
-            <th onclick="sortTable(3)">Last Updated</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Rows will be populated with JS from a JSON -->
-        </tbody>
-      </table>
-      <div class="d-flex justify-content-between align-items center">
-        <div>
-          <label for="rowsPerPage">Rows per page:</label>
-          <select id="rowsPerPage" onchange="changeRowsPerPage()" class="custom-select" style="width: auto;">
-            <option value="10">10 / page</option>
-            <option value="15">15 / page</option>
-            <option value="25">25 / page</option>
-          </select>
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <div class="col-md-7 m-4">
+          <h4>STYLE ATTRIBUTES</h4>
+          <p>Define Style Status (VMI, Fashion, Markdown) and Assortment Description</p>
+          <div class="input-group">
+            <input type="text" id="searchInput" class="form-control" onkeyup="searchTable()" aria-label="Search" aria-describedby="button-search">
+            <button class="btn btn-outline-secondary" type="button" id="button-search">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
+              </span>
+            </button>
+          </div>
+          <table class="table table-bordered" id="styleTable">
+            <thead class="thead-dark">
+              <tr>
+                <th onclick="sortTable(0)">Style Color</th>
+                <th onclick="sortTable(1)">Style Status</th>
+                <th onclick="sortTable(2)">Assort Descr</th>
+                <th onclick="sortTable(3)">Last Updated</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rows will be populated with JS from a JSON -->
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-center align-items center">
+            <nav>
+              <ul class="pagination" id="pagination">
+                <!-- Pagination buttons will be populated with JS -->
+              </ul>
+            </nav>
+            <div class="input-group custom-select">
+              <!-- <label class="input-group-text" for="rowsPerPage">Rows per page:</label> -->
+              <select id="rowsPerPage" onchange="changeRowsPerPage()" class="form-control">
+                <option value="10">10 / page</option>
+                <option value="15">15 / page</option>
+                <option value="25">25 / page</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <nav>
-          <ul class="pagination" id="pagination">
-            <!-- Pagination buttons will be populated with JS -->
-          </ul>
-        </nav>
+        <div class="col-md-4 mr-4 ml-4 d-flex align-items-start justify-content-end">
+          <button class="btn btn-primary" onclick="addRow()"><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+          </svg></span> Add</button>
+        </div>
       </div>
-    </div>
-    <div class="container mt-4">
-      <button class="btn btn-primary" onclick="addRow()">Add New Line Item</button>
     </div>
   </div>
 
