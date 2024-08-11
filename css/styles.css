@@ -37,7 +37,7 @@ h4 {
 }
 
 .table {
-  margin-top: 20px;
+  margin-top: 0;
 }
 
 .table thead {
@@ -96,6 +96,24 @@ h4 {
   background-color: #fff;
   padding: 0;
   width: 10rem;
+}
+
+.bi-chevron-left, .bi-chevron-right {
+  width: 48;
+  height: 48;
+}
+
+.attribute-information {
+  background-color: #1D4289;
+  color: #FFFFFF;
+}
+
+.p-attribute-information {
+  margin: 1rem 1rem 0 1rem;
+}
+
+.s-attribute-information {
+  margin-right: 1rem;
 }
 
 /* ------------------ Responsive ------------------ */
