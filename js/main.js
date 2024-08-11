@@ -1,6 +1,9 @@
 let currentPage = 1;
 let rowsPerPage = 10;
 let data = [];
+const addModalElement = document.getElementById('addModal');
+const addModal = new bootstrap.Modal(addModalElement);
+const openModal = document.getElementById('openModal');
 
 document.addEventListener("DOMContentLoaded", async function() {
   data = await fetchData();
@@ -20,6 +23,7 @@ function displayTable(data, rowsPerPage, page) {
   for(let index = 0; index < paginatedItems.length; index++) {
     let row = `
       <tr>
+        <td><input type="checkbox" id="selectBox" onclick="toggleCheckbox(this)"></td>
         <td>${paginatedItems[index].styleColor}</td>
         <td>${paginatedItems[index].styleStatus}</td>
         <td>${paginatedItems[index].assortDescr}</td>
@@ -58,6 +62,30 @@ function paginationButton(page, data) {
     currentBtn.classList.remove('active');
 
     button.classList.add('active');
+  });
+
+  return button;
+}
+
+function createArrowButton(type, pageCount, data) {
+  let button = document.createElement("li");
+  button.classList.add('page-item');
+  button.innerHTML = `<a href="#" class="page-link">${type === 'prev' ? '<i class="bi bi-chevron-left"></i>' : '<i class="bi bi-chevron-right"></i>'}</a>`;
+
+  if((type === 'prev' && currentPage === 1) || (type === 'next'&& currentPage === pageCount)) {
+    button.classList.add('disabled');
+  }
+
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+    if(type === 'prev' && currentPage > 1) {
+      currentPage--;
+    } else if(type === 'next' && currentPage < pageCount) {
+      currentPage++;
+    }
+
+    displayTable(data, rowsPerPage, currentPage);
+    setupPagination(data, rowsPerPage);
   });
 
   return button;
@@ -131,14 +159,31 @@ function searchTable() {
   }
 }
 
-function addRow() {
-  const table = document.getElementById("styleTable").getElementsByTagName("tbody")[0];
-  let newRow = `
-    <tr>
-      <td contenteditable="true">New Color</td>
-      <td contenteditable="true">New Status</td>
-      <td contenteditable="true">New Descr</td>
-      <td contenteditable="true">New Date</td>
-    </tr>`;
+function addRowFromModal() {
+  const form = document.getElementById("addForm");
+
+  if(form.checkValidity()) {
+    const table = document.getElementById("styleTable").getElementsByTagName("tbody")[0];
+    
+    const color = document.getElementById("newColor").value;
+    const status = document.getElementById("newStatus").value;
+    const descr = document.getElementById("newDescr").value;
+    const date = document.getElementById("newDate").value;
+  
+    let newRow = `
+      <tr>
+        <td><input type="checkbox"></td>
+        <td contenteditable="true">${color}</td>
+        <td contenteditable="true">${status}</td>
+        <td contenteditable="true">${descr}</td>
+        <td contenteditable="true">${date}</td>
+      </tr>`;
+    
     table.innerHTML += newRow;
+  
+    addModal.hide();  
+    form.reset();
+  } else {
+    form.reportValidity();
+  }
 }

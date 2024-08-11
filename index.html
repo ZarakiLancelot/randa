@@ -54,13 +54,35 @@
               </span>
             </button>
           </div>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <p>Attribute Information</p>
+          </div>
           <table class="table table-bordered" id="styleTable">
             <thead class="thead-dark">
               <tr>
-                <th onclick="sortTable(0)">Style Color</th>
-                <th onclick="sortTable(1)">Style Status</th>
-                <th onclick="sortTable(2)">Assort Descr</th>
-                <th onclick="sortTable(3)">Last Updated</th>
+                <th></th>
+                <th onclick="sortTable(1)">Style Color
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                      <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                    </svg>
+                  </span>
+                </th>
+                <th onclick="sortTable(2)">Style Status
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                      <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                    </svg>
+                  </span>
+                </th>
+                <th onclick="sortTable(3)">Assort Descr
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                      <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                    </svg>
+                  </span>
+                </th>
+                <th onclick="sortTable(4)">Last Updated</th>
               </tr>
             </thead>
             <tbody>
@@ -74,7 +96,6 @@
               </ul>
             </nav>
             <div class="input-group custom-select">
-              <!-- <label class="input-group-text" for="rowsPerPage">Rows per page:</label> -->
               <select id="rowsPerPage" onchange="changeRowsPerPage()" class="form-control">
                 <option value="10">10 / page</option>
                 <option value="15">15 / page</option>
@@ -84,9 +105,49 @@
           </div>
         </div>
         <div class="col-md-4 mr-4 ml-4 d-flex align-items-start justify-content-end">
-          <button class="btn btn-primary" onclick="addRow()"><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+          <button class="btn btn-primary" id="openModal" data-bs-toggle="modal" data-bs-target="#addModal"><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
           </svg></span> Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addModalLabel">New Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addForm">
+            <div class="mb-3">
+              <label for="newColor" class="form-label">Style Color</label>
+              <input type="text" class="form-control" id="newColor" required>
+            </div>
+            <div class="mb-3">
+              <label for="newStatus" class="form-label">Style Status</label>
+              <select class="form-control" id="newStatus" required>
+                <option value="VMI">VMI</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Markdown">Markdown</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="newDescr" class="form-label">Assort Description</label>
+              <input type="text" class="form-control" id="newDescr" required>
+            </div>
+            <div class="mb-3">
+              <label for="newDate" class="form-label">Last Updated</label>
+              <input type="date" class="form-control" id="newDate" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="addRowFromModal()">Save</button>
         </div>
       </div>
     </div>
